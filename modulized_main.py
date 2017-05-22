@@ -9,17 +9,17 @@ import xgboost as xgb
 
 
 print "loading data...."
-train = pd.read_csv('data/train.csv')
-test = pd.read_csv('data/test.csv')
-macro = pd.read_csv('data/macro.csv')
-id_test = test.id # for output
+train, test, macro  = [pd.read_csv('data/train.csv'),
+                       pd.read_csv('data/test.csv'),
+                       pd.read_csv('data/macro.csv')]
+
+id_test = test.id
 
 def feature_engineering():
     print "feature engereering...." # drop time, since test is all "future"
-    y_train = train["price_doc"]
-    x_train = train.drop(["id", "timestamp", "price_doc"], axis=1)
-    x_test = test.drop(["id", "timestamp"], axis=1)
-
+    y_train, x_train, x_test = [train["price_doc"],
+                                train.drop(["id", "timestamp", "price_doc"], axis=1),
+                                test.drop(["id", "timestamp"], axis=1)]
     for c in x_train.columns:
         if x_train[c].dtype == 'object':
             lbl = preprocessing.LabelEncoder()
