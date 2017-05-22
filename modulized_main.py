@@ -45,7 +45,7 @@ params = {
     'eval_metric': 'rmse',
     'silent': 1}
 dfun.train_gradient_boost(params, num_boost_round = 400) # try early stopping
-print "training score = ", RMSLE(dfun.predict(X),dfun.get_Y())
+print "training score = ", RMSLE(dfun.predict(X),y)
 
 # dtest = xgb.DMatrix(x_test)
 # dtrain = xgb.DMatrix(x_train.head, y_train.head)
