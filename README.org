@@ -1,0 +1,7 @@
+* TODO Feature engeering
+* TODO Paras Fine turning
+* TODO [[https://github.com/dmlc/xgboost/blob/master/demo/guide-python/custom_objective.py][custom_objective]]
+* TODO Testing data is all about "future". Need extroplation.
+** Treat data unequally? (different weights?) 
+*** c.f.: [[https://github.com/dmlc/xgboost/blob/master/doc/python/python_intro.md][Python Package Introduction]]
+** time series?
