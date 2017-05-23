@@ -6,7 +6,7 @@ import xgboost as xgb
 from sklearn import preprocessing 
 import utils
 reload(utils)
-from utils import DataFun, rmlse
+from utils import *
 
 
 print "loading data...."
@@ -32,8 +32,8 @@ def feature_engineering():
             x_test[c] = lbl.transform(list(x_test[c].values))
     return  np.array(x_train), np.array(y_train) # X,y for training
 
-X,y = feature_engineering()
-dfun = DataFun(X,y)
+X, y = feature_engineering()
+dfun = DataFun(X, y)
 
 params = {
     'eta': 0.02,

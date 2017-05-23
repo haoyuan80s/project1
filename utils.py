@@ -1,13 +1,14 @@
 import xgboost as xgb
+import numpy as np
 
-def RMSLE(P,A):
-    return np.sqrt( sum((np.log(P + 1) - np.log(A+1))**2) /len(P) )
+def rmlse(y_hat,y):
+    return np.sqrt( sum((np.log(y_hat + 1) - np.log(y+1))**2) /len(y) )
 
-def split_data(x, gamma = 0.9):
+def split_data(x, weight = 0.9):
     """
-    split_data into to parts. |part1|/ |part1 + part2| == gamma
+    split_data into to parts. |part1|/ |part1 + part2| == weight
     """
-    offset = int(len(x) * gamma)
+    offset = int(len(x) * weight)
     return x[:offset], x[offset:]
 
 class DataFun:
@@ -24,8 +25,8 @@ class DataFun:
         """
         training grad boost with data = X,y. para = para
         """
-        print "training GB....."
-        dtrain = xgb.DMatrix(self.X,self.y)
+        print "training GB......"
+        dtrain = xgb.DMatrix(self.X, self.y)
         model = xgb.train(params, dtrain, num_boost_round = num_boost_round)
         self.models += [model]
 
@@ -35,6 +36,6 @@ class DataFun:
         """
         return NotImplemented
 
-    def predict(self,X, i = 0):
-        model = self.models[i]
+    def predict(self,X, model_id = 0):
+        model = self.models[model_id]
         return model.predict(xgb.DMatrix(X))
